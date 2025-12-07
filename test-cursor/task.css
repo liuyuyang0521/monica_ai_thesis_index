@@ -1,0 +1,814 @@
+.task-header {
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 81, 255, 0.08);
+}
+
+.task-header-inner {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  height: 48px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-header-my {
+  margin-left: 24px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  color: #5c6276;
+  cursor: pointer;
+}
+
+.task-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.task-header-points {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.points-label {
+  color: #5c6276;
+}
+
+.points-value {
+  color: #0f51ff;
+  font-weight: 700;
+}
+
+.task-header-recharge {
+  background: linear-gradient(90deg, #ec6310, #faa04b);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.task-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid #ffffff;
+}
+
+.task-header-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #c9d9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f51ff;
+}
+
+.task-header-toggle {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #f5f7fb;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.task-layout {
+  width: 100%;
+  max-width: 1920px;
+  margin: 16px auto 32px; /* 上下间距略缩小，方便一屏展示 */
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.task-sidebar {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-section.sidebar-title {
+  padding: 0 24px 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 12px;
+}
+
+.sidebar-link {
+  display: block;          /* 统一为块级元素，按钮和链接高度一致 */
+  width: 100%;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: #5c6276;
+  transition: all 0.2s;
+  text-decoration: none; /* 侧边栏按钮/链接取消下划线 */
+}
+
+.sidebar-link.active {
+  background: rgba(15, 81, 255, 0.08);
+  color: #0f51ff;
+  font-weight: 600;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: #e4e7f0;
+  margin: 12px 0;
+}
+
+.sidebar-back {
+  border: none;
+  background: transparent;
+  padding: 8px 24px;
+  text-align: left;
+  font-size: 14px;
+  color: #5c6276;
+  cursor: pointer;
+}
+
+.task-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task-main-header {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  padding: 20px 24px;
+}
+
+.task-main-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.task-main-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #5c6276;
+}
+
+.task-main-body {
+  display: grid;
+  grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.task-panel-left,
+.task-panel-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  padding: 16px 20px; /* 略微缩小内边距，压缩整体高度 */
+}
+
+.task-card-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.task-card-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.task-card-row-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px; /* 四个板块与标题之间上边距 20px */
+}
+
+.task-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.task-field-label {
+  font-weight: 600;
+}
+
+.task-required {
+  color: #f1330d;
+  margin-left: 4px;
+}
+
+.task-input,
+.task-textarea {
+  border-radius: 8px;
+  border: 1px solid #e4e7f0;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.task-input:focus,
+.task-textarea:focus {
+  border-color: #0f51ff;
+}
+
+.task-select {
+  border-radius: 12px;
+  border: 1px solid #e4e7f0; /* 显示边框 */
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  background: rgba(255, 255, 255, 0.6); /* 半透明底色 */
+  backdrop-filter: blur(8px);           /* 毛玻璃效果 */
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.task-select:focus {
+  border-color: #0f51ff;
+}
+
+/* 四个基础信息选项框下边距 20px */
+.task-card-row-4 .task-input,
+.task-card-row-4 .task-select {
+  margin-bottom: 20px;
+}
+
+.task-textarea {
+  resize: vertical;
+  min-height: 80px;
+  width: 100%;           /* 拉满整行，与输入框同宽 */
+  box-sizing: border-box;
+}
+
+.task-upload {
+  border-radius: 8px;
+  border: 1px dashed #c9d9ff;
+  padding: 24px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  color: #5c6276;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.task-upload-icon {
+  font-size: 28px;
+}
+
+.task-upload-tip {
+  font-size: 12px;
+  color: #9ba0b8;
+}
+
+.task-upload-input {
+  display: none; /* 隐藏真实 input */
+}
+
+.task-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* 拖拽高亮效果 */
+.task-upload.drag-over {
+  background: rgba(15, 81, 255, 0.03);
+  border-color: #0f51ff;
+}
+
+/* 文章降重页面的中间大上传区域，可以适当加高一点 */
+.article-upload {
+  min-height: 220px;
+}
+
+.task-citation-info {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.04); /* 灰色 20% 透明度底纹 */
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  padding: 10px; /* 底纹框内边距 10px */
+}
+
+.citation-column {
+  padding: 8px 14px; /* 适当缩小内边距 */
+}
+
+.citation-title {
+  margin: 0 0 8px;
+  font-size: 14px; /* 再缩小两号 */
+  font-weight: 700;
+}
+
+.citation-label {
+  margin: 8px 0 4px;
+  font-size: 12px; /* 文案字号缩小两号 */
+  color: #7d7d7d;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.citation-chip {
+  display: inline-block; /* 与文字同行 */
+  padding: 4px 10px;
+  border-radius: 16px;
+  border: 1px solid #d0d4e6;
+  font-size: 10px; /* 比文案小两号 */
+  background: #f7f8ff;
+  vertical-align: middle;
+}
+
+.citation-chip-wide {
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.task-delivery {
+  margin-top: 20px; /* 与上一块内容间距 20px */
+}
+
+.task-delivery-header {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.task-delivery-options {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px; /* 各选项之间间距 */
+}
+
+.task-delivery-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #000000;
+}
+
+.task-delivery-option input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.task-submit-btn {
+  margin-top: auto; /* 按钮自动贴到底部，两个页面位置保持一致 */
+  align-self: stretch;
+  height: 44px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0046ff, #2a7bff);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+/* ========== 充值页面 ========== */
+.payment-layout {
+  width: 100%;
+  height: calc(100vh - 48px); /* 减去顶部导航高度，刚好占满剩余屏幕 */
+  max-width: 1920px;
+  margin: 0 auto;
+  background: url("images/payment-bg.png") no-repeat center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0px 0;
+}
+
+/* 中心内容容器，参考设计图，整体保持 16:9 视觉比例 */
+.payment-inner {
+  width: 100%;
+  max-width: 1400px;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.payment-title-card {
+  width: 70%;
+  max-width: 900px;
+  min-height: 140px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.payment-title {
+  margin: 0 0 12px;
+  font-size: 40px;
+  letter-spacing: 0.6em;
+  text-indent: 0.6em;
+  font-weight: 800;
+  color: #0046ff;
+}
+
+.payment-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #333333;
+}
+
+.payment-card {
+  width: 70%;
+  max-width: 900px;
+  min-height: 260px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  padding: 32px 60px 40px;
+  box-sizing: border-box;
+}
+
+.payment-card-title {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: 16px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.payment-field {
+  margin-bottom: 16px;
+}
+
+.payment-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.payment-input {
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #e0e4f0;
+  padding: 0 12px;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.payment-input:focus {
+  border-color: #0046ff;
+}
+
+.payment-quick-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.payment-quick-btn {
+  min-width: 56px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #d6dbf0;
+  background: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payment-quick-btn:hover {
+  border-color: #0046ff;
+  color: #0046ff;
+}
+
+.payment-quick-btn.active {
+  border-color: #0046ff;
+  background: #e8f1ff;
+  color: #0046ff;
+}
+
+.payment-method {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.payment-method-btn {
+  margin-top: 8px;
+  margin-left: 2ch; /* 按钮整体向右移动约两个字符宽度 */
+  width: 90.5px;
+  height: 30.25px;
+  border-radius: 0;
+  cursor: pointer;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.payment-method-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.3);
+}
+
+.payment-method-btn:active {
+  transform: translateY(0);
+}
+
+.task-warning {
+  background: rgba(241, 51, 13, 0.2); /* f1330d, 不透明度 20% */
+  border-radius: 12px;
+  border-left: 4px solid #f1330d; /* 左侧底纹同色 */
+  padding: 16px 18px;
+  font-size: 18px; /* 内容 18 号 */
+  color: #f1330d;
+}
+
+.task-warning-title {
+  margin: 0 0 8px;
+  font-size: 20px; /* 标题 20 号 */
+  font-weight: 700;
+  color: #f1330d;
+  display: flex;
+  align-items: center;
+}
+
+.task-warning-title::before {
+  content: "!";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f1330d; /* 圆圈填充色 */
+  color: #ffffff;
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.task-warning-text {
+  margin: 0;
+  color: #f1330d;
+}
+
+.task-guide,
+.task-faq {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  padding: 16px 18px;
+  font-size: 14px; /* 一级正文字号 14 */
+  color: #000000; /* 一级正文颜色 */
+}
+
+.task-guide-title {
+  margin: 0 0 10px;
+  font-size: 20px; /* 标题字号 20 */
+  font-weight: 700;
+  color: #000000;
+}
+
+.task-faq-item {
+  margin: 0 0 8px;
+}
+
+.task-step-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  margin: 8px 0 2px;
+}
+
+.task-text-secondary {
+  font-size: 14px; /* 二级也是 14 号 */
+  color: #7d7d7d; /* 二级正文颜色 */
+  margin: 0 0 4px;
+}
+
+.task-text-highlight {
+  color: #0033cc; /* 重点字体颜色 */
+}
+
+.task-text-strong {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .task-main-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+ * 弱提示框样式（与登录页保持完全一致，覆盖全局样式）
+ * =======================================================*/
+.toast-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.toast-modal.show {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.toast-content {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 480px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.toast-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+}
+
+.toast-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  color: #666666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+
+.toast-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000000;
+}
+
+.toast-body {
+  padding: 28px;
+}
+
+.toast-message {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}
+
+.toast-footer {
+  display: flex;
+  gap: 12px;
+  padding: 20px 28px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  justify-content: flex-end;
+}
+
+.toast-btn {
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.toast-btn-primary {
+  background: linear-gradient(90deg, #0046ff, #2a7bff);
+  color: #ffffff;
+}
+
+.toast-btn-primary:hover {
+  background: linear-gradient(90deg, #0033cc, #1a6dff);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.3);
+}
+
+.toast-btn-secondary {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333333;
+}
+
+.toast-btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+

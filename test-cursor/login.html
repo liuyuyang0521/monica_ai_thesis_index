@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录 | 任务中心</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- 左侧背景区域 -->
+      <div class="login-background">
+        <div class="bg-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+          <div class="shape shape-4"></div>
+          <div class="shape shape-5"></div>
+        </div>
+        <div class="bg-lines">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+          <div class="line line-3"></div>
+        </div>
+      </div>
+
+      <!-- 右侧登录表单 -->
+      <div class="login-form-wrapper">
+        <div class="login-form">
+          <h1 class="login-title">登录</h1>
+          
+          <!-- 登录方式标签页 -->
+          <div class="login-tabs">
+            <button class="tab-btn active" data-tab="phone">手机号登录</button>
+            <button class="tab-btn" data-tab="email">邮箱登录</button>
+          </div>
+
+          <!-- 手机号登录表单 -->
+          <form class="login-form-content" id="phone-form">
+            <div class="form-group">
+              <label for="phone">手机号</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                placeholder="请输入" 
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="code">验证码</label>
+              <div class="code-input-group">
+                <input 
+                  type="text" 
+                  id="code" 
+                  name="code" 
+                  placeholder="请输入" 
+                  required
+                />
+                <button type="button" class="send-code-btn">立即发送</button>
+              </div>
+            </div>
+            <button type="submit" class="login-submit-btn">立即登录</button>
+          </form>
+
+          <!-- 邮箱登录表单 -->
+          <form class="login-form-content hidden" id="email-form">
+            <div class="form-group">
+              <label for="email">邮箱</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="请输入" 
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email-code">验证码</label>
+              <div class="code-input-group">
+                <input 
+                  type="text" 
+                  id="email-code" 
+                  name="email-code" 
+                  placeholder="请输入" 
+                  required
+                />
+                <button type="button" class="send-code-btn" id="send-email-code-btn">立即发送</button>
+              </div>
+            </div>
+            <button type="submit" class="login-submit-btn">立即登录</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 提示弹框 -->
+    <div class="toast-modal" id="toastModal">
+      <div class="toast-content">
+        <div class="toast-header">
+          <h3 class="toast-title" id="toastTitle">提示</h3>
+          <button class="toast-close" id="toastClose">&times;</button>
+        </div>
+        <div class="toast-body">
+          <p class="toast-message" id="toastMessage">这是一条提示信息</p>
+        </div>
+        <div class="toast-footer">
+          <button class="toast-btn toast-btn-primary" id="toastConfirm">确定</button>
+          <button class="toast-btn toast-btn-secondary" id="toastCancel" style="display: none;">取消</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="toast.js"></script>
+    <script src="login.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>任务中心 | AI 赋能科研</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="task.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 未登录状态的任务栏 -->
+    <header class="site-header" id="header-not-logged-in">
+      <div class="nav-left">
+        <div class="logo-icon">
+          <span class="slider slider-1"></span>
+          <span class="slider slider-2"></span>
+          <span class="slider slider-3"></span>
+        </div>
+        <button class="logo-text">任务中心</button>
+      </div>
+      <div class="nav-right">
+        <!-- <span class="nav-register">注册</span> -->
+        <button class="btn nav-login">登录</button>
+      </div>
+    </header>
+
+    <!-- 已登录状态的任务栏 -->
+    <header class="task-header" id="header-logged-in" style="display: none;">
+      <div class="task-header-inner">
+        <div class="nav-left">
+          <div class="logo-icon">
+            <span class="slider slider-1"></span>
+            <span class="slider slider-2"></span>
+            <span class="slider slider-3"></span>
+          </div>
+          <button class="logo-text">任务中心</button>
+          <button class="task-header-my">主页</button>
+        </div>
+
+        <div class="task-header-right">
+          <div class="task-header-points">
+            <span class="points-label">积分：</span>
+            <span class="points-value">000</span>
+          </div>
+          <button class="btn task-header-recharge">
+            立即充值
+            <span class="task-arrow"></span>
+          </button>
+          <div class="task-header-user">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <span class="user-name" id="user-name">用户名</span>
+          </div>
+          <button class="task-header-toggle">切换</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-title-image">
+            <img src="images/hero-title.png" alt="科技改变生活" />
+          </div>
+          <p class="hero-subtitle hero-subtitle-main">
+            <span class="hero-subtitle-ai">AI</span>赋能，致力于学术研究提供智能化解决方案
+          </p>
+          <button class="btn hero-cta-btn">
+            <span>立即体验</span>
+            <span class="hero-arrow"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 1920 × 240 功能模块容器（图片+标题占位） -->
+      <section class="feature-strip">
+        <div class="feature-strip-inner">
+            <div class="feature-strip-title">
+                <img src="images/feature-title.png" />
+              </div>  <!-- 中间标题占位容器（你可以在这里填文字或图片） -->
+          <div class="feature-strip-modules">
+            <!-- 模块 1 -->
+            <button class="feature-strip-item" data-target="section-essay">
+              <div class="feature-icon-box">
+                <div class="feature-icon-box">
+                    <img src="images/feature-icon-1.png"  />
+                  </div>
+              </div>
+              <div class="feature-text-box">
+                <p class="feature-text-line-1">AI</p>
+                <p class="feature-text-line-2">范文生成</p>
+              </div>
+            </button>
+
+            <!-- 模块 2 -->
+            <button class="feature-strip-item" data-target="section-rewrite">
+              <div class="feature-icon-box">
+                <div class="feature-icon-box">
+                    <img src="images/feature-icon-2.png"  />
+                  </div>
+                  <!-- 预留 icon 位置 -->
+              </div>
+              <div class="feature-text-box">
+                <p class="feature-text-line-1">AI</p>
+                <p class="feature-text-line-2">全文降重</p>
+              </div>
+            </button>
+
+            <!-- 模块 3 -->
+            <button class="feature-strip-item" data-target="section-ai-reduce">
+              <div class="feature-icon-box">
+                <div class="feature-icon-box">
+                    <img src="images/feature-icon-3.png"  />
+                  </div>
+                  <!-- 预留 icon 位置 -->
+              </div>
+              <div class="feature-text-box">
+                <p class="feature-text-line-1">AI</p>
+                <p class="feature-text-line-2">段落降重</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1920 × 1360 大背景容器 -->
+      <section class="mega-panel">
+        <div class="mega-panel-gradient">
+          <div class="mega-panel-pic">
+            <img src="images/mega-panel-pic.png"  />
+          </div>
+        </div>
+        
+        <div class="mega-panel-content" id="section-essay">
+          <h2 class="mega-title">自动范文生成</h2>
+          <div class="mega-pill-row">
+            <span class="mega-pill mega-pill-primary">独家优势</span>
+            <span class="mega-pill mega-pill-secondary">领先市面所有产品</span>
+          </div>
+
+          <div class="mega-columns">
+            <div class="mega-col">
+              <p class="mega-text">提供完整的证据链，全流程可溯源！</p>
+              <p class="mega-text">原始数据 → 代码 → 范文</p>
+            </div>
+
+            <div class="mega-col-2">
+              <h3 class="mega-subtitle">我们的网站：</h3>
+              <p class="mega-text">直接上传所有资料</p>
+              <p class="mega-text mega-text-small">甚至是聊天截图</p>
+              <p class="mega-text">AI自主分析文章需求，生成完整的项目文件</p>
+              <p class="mega-text mega-text-small">论文、附件、原始数据，可直接运行的代码，可溯源可编辑的图表</p>
+            </div>
+
+            <div class="mega-col-3">
+              <h3 class="mega-subtitle">其他网站：</h3>
+              <p class="mega-text">一篇毫无根据的文章，无法复现结果</p>
+              <p class="mega-text">没有可运行的代码</p>
+              <p class="mega-text">没有根据的图表</p>
+            </div>
+
+            <div class="mega-col mega-col-cta">
+              <button class="btn mega-orange-btn">
+                查看详情
+                <span class="hero-arrow"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1920 × 230 功能展示容器 -->
+        <div class="feature-showcase" id="section-rewrite">
+          <div class="feature-showcase-inner">
+            <div class="feature-showcase-content">
+              <h2 class="feature-showcase-title">文章降 AI / 降重</h2>
+              <p class="feature-showcase-desc">
+                智能改写技术，有效降低AI检测率和重复率，提升文章原创性。保持原意不变的同时，让文章更具人文特色。通过先进的自然语言处理算法，对文本进行深度改写，确保通过各类AI检测工具和查重检测。我们提供多轮改写服务，确保文章既保持原意，又达到查重要求，让您的研究成果顺利通过审核
+              </p>
+              <button class="btn feature-showcase-btn">
+                查看详情
+                <span class="hero-arrow"></span>
+              </button>
+            </div>
+            <div class="feature-showcase-image">
+              <img src="images/feature-showcase-pic.png" alt="功能展示" />
+            </div>
+          </div>
+        </div>
+
+        <div class="mega-panel-gradient2">
+          <div class="mega-panel-pic">
+            <img src="images/mega-panel-pic2.png"  />
+          </div>
+        </div>
+        <div class="mega-panel-content mega-panel-content-2" id="section-ai-reduce">
+          <h2 class="mega-title">自动AI降重</h2>
+          <div class="mega-pill-row">
+            <span class="mega-pill mega-pill-primary">独家优势</span>
+            <span class="mega-pill mega-pill-secondary">领先市面所有产品</span>
+          </div>
+
+          <div class="mega-columns">
+            <div class="mega-col">
+              <p class="mega-text">绝对真实的可查文献，专业引用格式，灵活章节分配！</p>
+              <p class="mega-text">真实文献 → 引用格式 → 文献综述</p>
+            </div>
+
+            <div class="mega-col-2">
+              <h3 class="mega-subtitle">我们的网站：</h3>
+              <p class="mega-text">绝对真实的可查文献</p>
+              <p class="mega-text">支持GBT和APA两种引用格式</p>
+              <p class="mega-text">自带上标和交叉引用格式</p>
+              <p class="mega-text">提供文献评述</p>
+              <p class="mega-text">灵活选择章节分配</p>
+              <p class="mega-text mega-text-small">按照国内外分配，或者按照专题分配</p>
+            </div>
+
+            <div class="mega-col-3">
+              <h3 class="mega-subtitle">其他网站：</h3>
+              <p class="mega-text">虚假文献</p>
+              <p class="mega-text">格式混乱</p>
+              <p class="mega-text">无上标和交叉引用</p>
+              <p class="mega-text">固定格式无法自定义</p>
+              <p class="mega-text">无文献评述</p>
+            </div>
+
+            <div class="mega-col mega-col-cta">
+              <button class="btn mega-orange-btn">
+                查看详情
+                <span class="hero-arrow"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="footer-content">
+        <div>
+          <h4>关于我们</h4>
+          <p>
+            专注 AI 写作与科研辅助工具，致力于在多个垂直行业落地。我们相信科技让创作更高效。
+          </p>
+        </div>
+        <div>
+          <h4>产品服务</h4>
+          <ul>
+            <li>智能写作</li>
+            <li>学术检测</li>
+            <li>文档管理</li>
+            <li>知识库</li>
+          </ul>
+        </div>
+        <div>
+          <h4>帮助中心</h4>
+          <ul>
+            <li>使用手册</li>
+            <li>常见问题</li>
+            <li>开放 API</li>
+            <li>隐私合规</li>
+          </ul>
+        </div>
+        <div>
+          <h4>关注我们</h4>
+          <ul>
+            <li>公众号：AI赋能</li>
+            <li>邮箱：hi@ai-lab.com</li>
+            <li>电话：400-800-8888</li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">
+        © 2025 AIWhim. 保留所有权利 | 粤ICP备000000号
+      </p>
+    </footer>
+
+    <!-- 提示弹框 -->
+    <div class="toast-modal" id="toastModal">
+      <div class="toast-content">
+        <div class="toast-header">
+          <h3 class="toast-title" id="toastTitle">提示</h3>
+          <button class="toast-close" id="toastClose">&times;</button>
+        </div>
+        <div class="toast-body">
+          <p class="toast-message" id="toastMessage">这是一条提示信息</p>
+        </div>
+        <div class="toast-footer">
+          <button class="toast-btn toast-btn-primary" id="toastConfirm">确定</button>
+          <button class="toast-btn toast-btn-secondary" id="toastCancel" style="display: none;">取消</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="toast.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+

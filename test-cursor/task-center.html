@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>任务中心 | 二级页面</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="task.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 顶部导航栏 -->
+    <header class="task-header">
+      <div class="task-header-inner">
+        <div class="nav-left">
+          <div class="logo-icon">
+            <span class="slider slider-1"></span>
+            <span class="slider slider-2"></span>
+            <span class="slider slider-3"></span>
+          </div>
+          <button class="logo-text">任务中心</button>
+          <button class="task-header-my">主页</button>
+        </div>
+
+        <div class="task-header-right">
+          <div class="task-header-points">
+            <span class="points-label">积分：</span>
+            <span class="points-value">000</span>
+          </div>
+          <button class="btn task-header-recharge">
+            立即充值
+            <span class="task-arrow"></span>
+          </button>
+          <div class="task-header-user">
+            <div class="user-avatar">U</div>
+            <span class="user-name">用户名</span>
+          </div>
+          <button class="task-header-toggle">切换</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主体布局 -->
+    <main class="task-layout">
+      <!-- 左侧导航栏 -->
+      <aside class="task-sidebar">
+        <div class="sidebar-section sidebar-title">任务广场</div>
+        <nav class="sidebar-nav">
+          <button class="sidebar-link active">范文生成</button>
+          <a href="task-article.html" class="sidebar-link">文章降重</a>
+          <a href="task-paragraph.html" class="sidebar-link">段落降重</a>
+        </nav>
+      </aside>
+
+      <!-- 右侧内容区 -->
+      <section class="task-main">
+        <!-- 模块标题区域 -->
+        <header class="task-main-header">
+          <h1 class="task-main-title">AI 范文生成</h1>
+          <p class="task-main-subtitle">
+            根据上传的需求自动生成高质量范文，支持多种文献格式与结构。
+          </p>
+        </header>
+
+        <!-- 动态内容容器 -->
+        <section class="task-main-body">
+          <div class="task-panel-left">
+            <div class="task-card">
+              <h2 class="task-card-title">基础信息</h2>
+              <div class="task-card-row">
+                <label class="task-field">
+                  <span class="task-field-label"
+                    >论文标题<span class="task-required">*</span></span
+                  >
+                  <input
+                    class="task-input"
+                    type="text"
+                    placeholder="请输入论文标题，如“AI 在学术写作中的应用研究”"
+                  />
+                </label>
+              </div>
+              <div class="task-card-row task-card-row-4">
+                <label class="task-field">
+                  <span class="task-field-label"
+                    >专业领域<span class="task-required">*</span></span
+                  >
+                  <input
+                    class="task-input"
+                    type="text"
+                    placeholder="如：计算机科学、经济学等"
+                  />
+                </label>
+                <label class="task-field">
+                  <span class="task-field-label"
+                    >目标字数<span class="task-required">*</span></span
+                  >
+                  <input
+                    class="task-input"
+                    type="number"
+                    min="0"
+                    placeholder="如：8000"
+                  />
+                </label>
+                <label class="task-field">
+                  <span class="task-field-label"
+                    >数据状态<span class="task-required">*</span></span
+                  >
+                  <select class="task-select">
+                    <option value="none">不需要</option>
+                    <option value="need_no_data">需要，但没数据</option>
+                    <option value="in_files">数据在资料中</option>
+                  </select>
+                </label>
+                <label class="task-field">
+                  <span class="task-field-label"
+                    >引文格式<span class="task-required">*</span></span
+                  >
+                  <select class="task-select">
+                    <option value="gbt">GBT7714</option>
+                    <option value="apa">APA</option>
+                    <option value="none">不需要文献</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="task-card task-citation-info">
+                <div class="citation-column">
+                  <h3 class="citation-title">GBT7714</h3>
+                  <p class="citation-label">文内使用</p>
+                  <div class="citation-chip">[1]</div>
+                  <p class="citation-label">末尾使用</p>
+                  <div class="citation-chip citation-chip-wide">
+                    [1] 蔡艳娟, 程显毅, 潘燕. 面向自然语言处理的人工智能框架[C]//CNKI.CNKI, 2011:5.
+                  </div>
+                </div>
+                <div class="citation-column">
+                  <h3 class="citation-title">APA</h3>
+                  <p class="citation-label">文内使用</p>
+                  <div class="citation-chip">(蔡艳娟, et al., 2011)</div>
+                  <p class="citation-label">末尾使用</p>
+                  <div class="citation-chip citation-chip-wide">
+                    蔡艳娟, 程显毅, &amp; 潘燕. (2011). 面向自然语言处理的人工智能框架. CNKI (Vol.28, pp.5). CNKI.
+                  </div>
+                </div>
+              </div>
+
+              <!-- 交付类型板块 -->
+              <div class="task-delivery">
+                <div class="task-delivery-header">
+                  <span class="task-field-label"
+                    >交付文件类型<span class="task-required">*</span></span
+                  >
+                </div>
+                <div class="task-delivery-options">
+                  <label class="task-delivery-option">
+                    <input type="checkbox" />
+                    <span>论文</span>
+                  </label>
+                  <label class="task-delivery-option">
+                    <input type="checkbox" />
+                    <span>数据文件</span>
+                  </label>
+                  <label class="task-delivery-option">
+                    <input type="checkbox" />
+                    <span>访谈大纲</span>
+                  </label>
+                  <label class="task-delivery-option">
+                    <input type="checkbox" />
+                    <span>问卷</span>
+                  </label>
+                  <label class="task-delivery-option">
+                    <input type="checkbox" />
+                    <span>代码</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-card">
+              <h2 class="task-card-title">
+                写作与特殊要求<span class="task-required">*</span>
+              </h2>
+              <textarea
+                class="task-textarea"
+                rows="5"
+                placeholder="请描述写作方向、研究方法、数据情况、篇幅要求等…"
+              ></textarea>
+            </div>
+
+            <div class="task-card">
+              <h2 class="task-card-title">相关资料文件</h2>
+              <div class="task-upload" id="taskUploadArea">
+                <!-- 真正的文件输入框：隐藏，只负责打开本地磁盘 & 接收文件 -->
+                <input
+                  id="taskFiles"
+                  class="task-upload-input"
+                  type="file"
+                  multiple
+                />
+                <!-- 可点击 & 可拖拽的可视区域 -->
+                <label for="taskFiles" class="task-upload-label">
+                  <div class="task-upload-icon">📄</div>
+                  <p class="task-upload-text">点击选择文件或将文件拖拽到此处</p>
+                  <p class="task-upload-tip">
+                    支持 PDF、Word、TXT 等格式，单个文件不超过 20MB
+                  </p>
+                </label>
+              </div>
+            </div>
+
+            <button class="btn task-submit-btn">提交任务</button>
+          </div>
+
+          <aside class="task-panel-right">
+            <div class="task-warning">
+              <h3 class="task-warning-title">严禁将本站内容作为学术不端用途</h3>
+              <p class="task-warning-text">
+                根据《中华人民共和国学位条例》《学术道德规范》等相关规定，本工具仅用于协助润色与结构规划，请勿直接将生成内容作为学术成果提交。
+              </p>
+            </div>
+
+            <div class="task-guide">
+              <h3 class="task-guide-title">使用说明</h3>
+              <div class="task-guide-body">
+                <p class="task-step-title">第一步：填写基础信息</p>
+                <p class="task-text-secondary">输入论文题目、专业和字数</p>
+
+                <p class="task-step-title">第二步：设置数据状态</p>
+                <p class="task-text-secondary">
+                  如果要写实证论文但是没有数据，就选择
+                  <span class="task-text-highlight">“需要，但我没有数据”</span>
+                </p>
+                <p class="task-text-secondary">
+                  如果有数据的话，就选
+                  <span class="task-text-highlight">“数据在资料中”</span>，然后记得在下方的“相关资料文件”处上传哦
+                </p>
+                <p class="task-text-secondary">
+                  如果论文不涉及任何数据，就选择
+                  <span class="task-text-highlight">“不需要”</span>
+                </p>
+
+                <p class="task-step-title">第三步：选择需要的文件类型</p>
+                <p class="task-text-secondary">
+                  <span class="task-text-highlight">论文：</span>很明显，
+                  <span class="task-text-highlight">必选</span>
+                </p>
+                <p class="task-text-secondary">
+                  <span class="task-text-highlight">数据文件：</span>会给你论文使用到的
+                  <span class="task-text-highlight">原始数据</span>！
+                </p>
+                <p class="task-text-secondary">
+                  <span class="task-text-highlight">访谈大纲/问卷：</span>访谈大纲和问卷都会帮你生成！跟论文配套
+                </p>
+                <p class="task-text-secondary">
+                  <span class="task-text-highlight">代码：</span>适用于
+                  <span class="task-text-highlight">计算机专业</span>，我们将提供完整的系统级代码、算法
+                </p>
+
+                <p class="task-step-title">第四步：填写写作要求</p>
+                <p class="task-text-secondary">输入任何你想说的话，你可以写下你的大纲：</p>
+                <p class="task-text-secondary">
+                  “根据开题报告完成论文，核心章节要有图表”（开题报告要在下面上传）
+                </p>
+                <p class="task-text-secondary">
+                  “图片中是我跟老师的聊天截图，请务必分析”（图片要在下面上传）
+                </p>
+                <p class="task-text-secondary">
+                  “根据我的代码完成论文”（代码 .zip 要在下面上传）
+                </p>
+                <p class="task-text-secondary">“至少 80 篇独立文献引用”</p>
+                <p class="task-text-secondary">直接把我当人，写下你的一切要求！</p>
+
+                <p class="task-step-title">第五步：上传文件</p>
+                <p class="task-text-secondary">
+                  随便传，
+                  <span class="task-text-highlight">文档、代码、图片、数据</span>
+                  ，支持任何文件！没有就不传
+                </p>
+              </div>
+            </div>
+
+            <div class="task-faq">
+              <h3 class="task-guide-title">常见问题</h3>
+              <p class="task-faq-item">
+                <span class="task-text-strong">Q：文献是真实文献吗？</span><br />
+                <span class="task-text-secondary">A：全部真实</span>
+              </p>
+              <p class="task-faq-item">
+                <span class="task-text-strong">Q：需要多久？</span><br />
+                <span class="task-text-secondary">A：平均 30 分钟完成</span>
+              </p>
+            </div>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <!-- 提示弹框（与登录页保持完全一致） -->
+    <div class="toast-modal" id="toastModal">
+      <div class="toast-content">
+        <div class="toast-header">
+          <h3 class="toast-title" id="toastTitle">提示</h3>
+          <button class="toast-close" id="toastClose">&times;</button>
+        </div>
+        <div class="toast-body">
+          <p class="toast-message" id="toastMessage">这是一条提示信息</p>
+        </div>
+        <div class="toast-footer">
+          <button class="toast-btn toast-btn-primary" id="toastConfirm">确定</button>
+          <button class="toast-btn toast-btn-secondary" id="toastCancel" style="display: none;">
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="toast.js"></script>
+    <script src="task.js"></script>
+  </body>
+</html>
+
+
