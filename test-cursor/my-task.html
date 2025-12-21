@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>任务中心 | 我的任务</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="task.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="my-task-page">
+    <!-- 顶部导航栏，与 task-center 保持一致 -->
+    <header class="task-header">
+      <div class="task-header-inner">
+        <div class="nav-left">
+          <div class="logo-icon">
+            <span class="slider slider-1"></span>
+            <span class="slider slider-2"></span>
+            <span class="slider slider-3"></span>
+          </div>
+          <button class="logo-text">任务中心</button>
+          <button class="task-header-my">主页</button>
+          <button class="task-header-task">我的任务</button>
+        </div>
+
+        <div class="task-header-right">
+          <div class="task-header-points">
+            <span class="points-label">积分：</span>
+            <span class="points-value">000</span>
+          </div>
+          <button class="btn task-header-recharge">
+            立即充值
+            <span class="task-arrow"></span>
+          </button>
+          <div class="task-header-user">
+            <div class="user-avatar">U</div>
+            <span class="user-name">用户名</span>
+          </div>
+          <button class="task-header-toggle">切换</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主体布局：与任务中心同宽 -->
+    <main class="task-layout">
+      <section class="task-card my-task-card">
+        <div class="my-task-header">
+          <h1 class="task-main-title">我的任务</h1>
+          <p class="task-main-subtitle">任务记录与进度</p>
+        </div>
+
+        <div class="my-task-table-wrapper">
+          <div class="my-task-table-row my-task-table-header">
+            <div class="my-task-col my-task-col-time">创建时间</div>
+            <div class="my-task-col my-task-col-feature">功能</div>
+            <div class="my-task-col my-task-col-progress">进度</div>
+            <div class="my-task-col my-task-col-action">操作</div>
+          </div>
+
+          <!-- 示例行：范文生成 -->
+          <div class="my-task-table-row">
+            <div class="my-task-col my-task-col-time">2025.12.10 22:00</div>
+            <div class="my-task-col my-task-col-feature">范文生成</div>
+            <div class="my-task-col my-task-col-progress">
+              <div class="my-task-progress">
+                <div class="my-task-progress-bar" style="width: 60%;"></div>
+                <span class="my-task-progress-text">60%</span>
+              </div>
+            </div>
+            <div class="my-task-col my-task-col-action">
+              <button class="btn my-task-btn ghost">删除</button>
+              <button class="btn my-task-btn primary">下载</button>
+            </div>
+          </div>
+
+          <!-- 示例行：文章降重 -->
+          <div class="my-task-table-row">
+            <div class="my-task-col my-task-col-time">2025.12.10 22:05</div>
+            <div class="my-task-col my-task-col-feature">文章降重</div>
+            <div class="my-task-col my-task-col-progress">
+              <div class="my-task-progress">
+                <div class="my-task-progress-bar" style="width: 80%;"></div>
+                <span class="my-task-progress-text">80%</span>
+              </div>
+            </div>
+            <div class="my-task-col my-task-col-action">
+              <button class="btn my-task-btn ghost">删除</button>
+              <button class="btn my-task-btn primary">下载</button>
+            </div>
+          </div>
+
+          <!-- 示例行：段落降重（不可下载占位） -->
+          <div class="my-task-table-row">
+            <div class="my-task-col my-task-col-time">2025.12.10 22:10</div>
+            <div class="my-task-col my-task-col-feature">段落降重</div>
+            <div class="my-task-col my-task-col-progress">
+              <div class="my-task-progress">
+                <div class="my-task-progress-bar" style="width: 30%;"></div>
+                <span class="my-task-progress-text">30%</span>
+              </div>
+            </div>
+            <div class="my-task-col my-task-col-action">
+              <button class="btn my-task-btn ghost">删除</button>
+              <button class="btn my-task-btn disabled" disabled>不可下载</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 提示弹框（与登录页保持一致） -->
+    <div class="toast-modal" id="toastModal">
+      <div class="toast-content">
+        <div class="toast-header">
+          <h3 class="toast-title" id="toastTitle">提示</h3>
+          <button class="toast-close" id="toastClose">&times;</button>
+        </div>
+        <div class="toast-body">
+          <p class="toast-message" id="toastMessage">这是一条提示信息</p>
+        </div>
+        <div class="toast-footer">
+          <button class="toast-btn toast-btn-primary" id="toastConfirm">确定</button>
+          <button class="toast-btn toast-btn-secondary" id="toastCancel" style="display: none;">
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="toast.js"></script>
+    <script src="task.js"></script>
+  </body>
+</html>
+

@@ -82,6 +82,16 @@ function initTaskPage() {
     });
   }
 
+  // 顶部「我的任务」按钮：跳转我的任务页
+  const myTaskBtns = document.querySelectorAll(".task-header-task");
+  if (myTaskBtns.length) {
+    myTaskBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        window.location.href = "my-task.html";
+      });
+    });
+  }
+
   // 顶部「立即充值」按钮：跳转到在线充值页面
   const rechargeButtons = document.querySelectorAll(".task-header-recharge");
   rechargeButtons.forEach((btn) => {
@@ -90,9 +100,9 @@ function initTaskPage() {
     });
   });
 
-  // 充值页顶部「任务中心」按钮：返回范文生成页面
+  // 顶部「任务中心」按钮：统一返回 task-center
   const logoBtn = document.querySelector(".logo-text");
-  if (logoBtn && window.location.pathname.endsWith("task-payment.html")) {
+  if (logoBtn) {
     logoBtn.addEventListener("click", () => {
       window.location.href = "task-center.html";
     });

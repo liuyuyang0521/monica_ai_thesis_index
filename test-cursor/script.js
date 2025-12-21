@@ -15,18 +15,31 @@ function formatAccountDisplay(account) {
 }
 
 // 更新任务栏显示（根据登录状态）
+// 注意：index.html 页面始终显示未登录状态的任务栏，保持原有排版
 function updateHeaderDisplay() {
   const headerNotLoggedIn = document.getElementById('header-not-logged-in');
   const headerLoggedIn = document.getElementById('header-logged-in');
   const userAvatar = document.getElementById('user-avatar');
   const userName = document.getElementById('user-name');
   
+  // 检查当前页面是否是 index.html
+  const isIndexPage = window.location.pathname.includes('index.html') || 
+                      window.location.pathname === '/' || 
+                      window.location.pathname.endsWith('/');
+  
+  // index.html 页面始终显示未登录状态的任务栏，保持原有排版
+  if (isIndexPage) {
+    if (headerNotLoggedIn) headerNotLoggedIn.style.display = 'block';
+    if (headerLoggedIn) headerLoggedIn.style.display = 'none';
+    return;
+  }
+  
   // 从localStorage读取用户信息
   const account = localStorage.getItem('account');
   const userInfo = localStorage.getItem('userInfo');
   
   if (account) {
-    // 已登录：显示登录状态的任务栏
+    // 已登录：显示登录状态的任务栏（非 index.html 页面）
     if (headerNotLoggedIn) headerNotLoggedIn.style.display = 'none';
     if (headerLoggedIn) headerLoggedIn.style.display = 'block';
     
@@ -41,21 +54,39 @@ function updateHeaderDisplay() {
   }
 }
 
+// 判断是否已登录（以本地存储是否存在 account 为准）
+function isLoggedIn() {
+  return !!localStorage.getItem('account');
+}
+
 // 监听登录成功事件
 window.addEventListener('userLoggedIn', (event) => {
-  // 登录成功后更新任务栏
-  updateHeaderDisplay();
+  // 登录成功后更新任务栏（index.html 页面除外，保持未登录状态排版）
+  const isIndexPage = window.location.pathname.includes('index.html') || 
+                      window.location.pathname === '/' || 
+                      window.location.pathname.endsWith('/');
+  if (!isIndexPage) {
+    updateHeaderDisplay();
+  }
 });
 
 // 按钮点击交互
 document.addEventListener('DOMContentLoaded', () => {
+  const isIndexPage = window.location.pathname.includes('index.html') ||
+                      window.location.pathname === '/' ||
+                      window.location.pathname.endsWith('/');
+
   // 页面加载时检查登录状态
   updateHeaderDisplay();
   // Banner「立即体验」按钮 → 跳转范文生成页
   const heroCtaBtn = document.querySelector('.hero-cta-btn');
   if (heroCtaBtn) {
     heroCtaBtn.addEventListener('click', () => {
-      window.location.href = 'task-center.html';
+      if (isLoggedIn()) {
+        window.location.href = 'task-center.html';
+      } else {
+        window.location.href = 'login.html';
+      }
     });
   }
 
@@ -63,7 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const essayDetailBtn = document.querySelector('#section-essay .mega-orange-btn');
   if (essayDetailBtn) {
     essayDetailBtn.addEventListener('click', () => {
-      window.location.href = 'task-center.html';
+      if (isLoggedIn()) {
+        window.location.href = 'task-center.html';
+      } else {
+        window.location.href = 'login.html';
+      }
     });
   }
 
@@ -71,7 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const articleDetailBtn = document.querySelector('#section-rewrite .feature-showcase-btn');
   if (articleDetailBtn) {
     articleDetailBtn.addEventListener('click', () => {
-      window.location.href = 'task-article.html';
+      if (isLoggedIn()) {
+        window.location.href = 'task-article.html';
+      } else {
+        window.location.href = 'login.html';
+      }
     });
   }
 
@@ -79,7 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const aiReduceDetailBtn = document.querySelector('#section-ai-reduce .mega-orange-btn');
   if (aiReduceDetailBtn) {
     aiReduceDetailBtn.addEventListener('click', () => {
-      window.location.href = 'task-paragraph.html';
+      if (isLoggedIn()) {
+        window.location.href = 'task-paragraph.html';
+      } else {
+        window.location.href = 'login.html';
+      }
     });
   }
 
@@ -100,13 +143,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 登录状态的任务栏按钮
-  // "任务中心"按钮（登录状态）
-  const taskCenterBtnLoggedIn = document.querySelector('#header-logged-in .logo-text');
-  if (taskCenterBtnLoggedIn) {
-    taskCenterBtnLoggedIn.addEventListener('click', () => {
-      window.location.href = 'task-center.html';
-    });
-  }
+  // 顶部「任务中心」按钮：区分首页未登录与其他页面
+  const logoBtns = document.querySelectorAll('.logo-text');
+  logoBtns.forEach(btn => {
+    const isHeaderNotLogged = btn.closest('#header-not-logged-in');
+    if (isIndexPage && isHeaderNotLogged) {
+      // 首页未登录：跳转登录页
+      btn.addEventListener('click', () => {
+        window.location.href = 'login.html';
+      });
+    } else {
+      // 其他页面或已登录：统一跳 task-center
+      btn.addEventListener('click', () => {
+        window.location.href = 'task-center.html';
+      });
+    }
+  });
 
   // "主页"按钮
   const homeBtn = document.querySelector('.task-header-my');
@@ -124,7 +176,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // "切换"按钮（需要引入toast.js和task.js的功能，或者简单处理）
+  // "我的任务"按钮（任务栏）
+  const myTaskBtns = document.querySelectorAll('.task-header-task');
+  if (myTaskBtns.length) {
+    myTaskBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (isIndexPage && !isLoggedIn()) {
+          window.location.href = 'login.html';
+        } else {
+          window.location.href = 'my-task.html';
+        }
+      });
+    });
+  }
+
+  // "切换"按钮：清除登录信息并跳转到登录页面
   const toggleBtn = document.querySelector('.task-header-toggle');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
@@ -132,12 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.removeItem('userInfo');
       localStorage.removeItem('userId');
       localStorage.removeItem('account');
-      // 更新任务栏显示
-      updateHeaderDisplay();
-      // 可以添加提示
-      if (window.toast) {
-        toast.show({ title: '提示', message: '已退出登录' });
-      }
+      // 跳转到登录页面
+      window.location.href = 'login.html';
     });
   }
 
