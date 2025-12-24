@@ -131,21 +131,50 @@ function initTaskPage() {
   }
 }
 
-// 提供给所有页面公用的“切换账号”弱提示逻辑
+// 提供给所有页面公用的"切换账号"弱提示逻辑
 function handleSwitchClick() {
-  const message = "【切换账号提示】确定要切换当前账号，并返回登录页面吗？";
+  const message = "【切换账号提示】确定要登出当前账号，并返回登录页面吗？";
   const title = "切换账号";
 
   toast.confirm(
     message,
     title,
-    () => {
-      window.location.href = "login.html";
+    async () => {
+      // 确认：调用登出接口
+      await handleLogout();
     },
     () => {
       // 取消：不做任何事
     }
   );
+}
+
+// 处理登出
+async function handleLogout() {
+  try {
+    // 调用登出API（如果存在）
+    if (typeof logout === 'function') {
+      const result = await logout();
+      
+      if (result.success) {
+        console.log('登出成功');
+      } else {
+        console.error('登出API调用失败:', result.message);
+      }
+    }
+    
+  } catch (error) {
+    console.error('登出错误:', error);
+  } finally {
+    // 无论API是否成功，都清除本地缓存并跳转到登录页
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('account');
+    localStorage.removeItem('myTasks'); // 清除任务缓存
+    
+    // 跳转到登录页
+    window.location.href = 'login.html';
+  }
 }
 
 // 脚本在页面底部引入，DOM 已经就绪，直接执行

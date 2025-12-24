@@ -1,11 +1,7 @@
 // API配置
-// 如果使用代理服务器（端口3000），使用 '/api'
-// 如果使用Live Server或其他服务器，直接使用后端地址
-const isProxyServer = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
-  && window.location.port === '3000';
-const API_BASE_URL = isProxyServer
-  ? '/api'  // 代理服务器：通过代理转发
-  : 'http://192.168.2.31:8080/api';  // 直接访问后端（Live Server或其他环境）
+// 使用代理服务器解决Cookie跨域问题
+// 启动代理: node proxy-server.js，然后访问 http://localhost:3000
+const API_BASE_URL = 'http://localhost:3000/api';
 
 // 错误码映射配置
 // 成功码：通常为 0 或 200，其他均为错误码
@@ -113,8 +109,8 @@ function handleApiResponse(responseData, options = {}) {
     };
   }
   
-  // 错误码处理：优先使用错误码映射表中的消息，如果没有则使用后端返回的message
-  const errorMessage = ERROR_CODE_MAP[code] || message || `操作失败 (错误码: ${code})`;
+  // 错误码处理：优先使用后端返回的message，如果没有则使用错误码映射表
+  const errorMessage = message || ERROR_CODE_MAP[code] || `操作失败 (错误码: ${code})`;
   
   return {
     isSuccess: false,
@@ -210,25 +206,16 @@ async function sendVerificationCode(accountInput, sendBtn, way) {
       let errorMsg = '发送失败，请稍后重试';
       try {
         const errorData = await response.json();
-        // 如果返回的是标准格式，使用错误码处理
-        if (errorData.code !== undefined) {
-          const result = handleApiResponse(errorData);
-          errorMsg = result.message;
-        } else {
-          errorMsg = errorData.message || errorData.msg || `服务器错误 (${response.status})`;
-        }
+        // 优先使用后端返回的message字段
+        errorMsg = errorData.message || errorData.msg || `服务器错误 (${response.status})`;
       } catch (e) {
         // 如果响应不是JSON，使用状态码
-        if (response.status === 403) {
-          errorMsg = '请求被拒绝 (403)。\n\n可能的原因：\n1. 服务器未配置CORS跨域\n2. 需要联系后端开发人员配置允许跨域\n3. 或者使用代理服务器';
-        } else {
-          errorMsg = `请求失败 (状态码: ${response.status})`;
-        }
+        errorMsg = `请求失败 (状态码: ${response.status})`;
       }
       
       sendBtn.disabled = false;
       sendBtn.textContent = '立即发送';
-      toast.error(errorMsg, '发送失败');
+      toast.error(errorMsg, '提示');
       console.error('API响应错误:', response.status, response.statusText);
       return;
     }
@@ -250,7 +237,7 @@ async function sendVerificationCode(accountInput, sendBtn, way) {
       // 发送失败，显示错误提示
       sendBtn.disabled = false;
       sendBtn.textContent = '立即发送';
-      toast.error(result.message, '发送失败');
+      toast.error(result.message, '提示');
       console.error('发送验证码失败，错误码:', result.code, '错误信息:', result.message);
       return;
     }
@@ -285,7 +272,7 @@ async function sendVerificationCode(accountInput, sendBtn, way) {
       }
     }
     
-    toast.error(errorMsg, '发送失败');
+    toast.error(errorMsg, '提示');
   }
 }
 
@@ -345,7 +332,8 @@ phoneForm.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify({
         account: phone,
-        code: code
+        code: code,
+        way: 1  // 1-手机号登录
       })
     });
 
@@ -354,17 +342,13 @@ phoneForm.addEventListener('submit', async (e) => {
       let errorMsg = '登录失败，请稍后重试';
       try {
         const errorData = await response.json();
+        // 优先使用后端返回的message字段
         errorMsg = errorData.message || errorData.msg || `登录失败 (${response.status})`;
       } catch (e) {
-        if (response.status === 401) {
-          errorMsg = '验证码错误或已过期，请重新获取';
-        } else if (response.status === 403) {
-          errorMsg = '请求被拒绝，可能是CORS配置问题';
-        } else {
-          errorMsg = `登录失败 (状态码: ${response.status})`;
-        }
+        // 响应不是JSON，使用默认消息
+        errorMsg = `登录失败 (状态码: ${response.status})`;
       }
-      toast.error(errorMsg, '登录失败');
+      toast.error(errorMsg, '提示');
       console.error('登录API响应错误:', response.status, response.statusText);
       return;
     }
@@ -430,7 +414,7 @@ phoneForm.addEventListener('submit', async (e) => {
       }, 1500);
     } else {
       // 登录失败，显示错误提示
-      toast.error(result.message, '登录失败');
+      toast.error(result.message, '提示');
       console.error('登录失败，错误码:', result.code, '错误信息:', result.message);
     }
     
@@ -446,7 +430,7 @@ phoneForm.addEventListener('submit', async (e) => {
       }
     }
     
-    toast.error(errorMsg, '登录失败');
+    toast.error(errorMsg, '提示');
   }
 });
 
@@ -488,7 +472,8 @@ emailForm.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify({
         account: email,
-        code: code
+        code: code,
+        way: 2  // 2-邮箱登录
       })
     });
 
@@ -497,17 +482,13 @@ emailForm.addEventListener('submit', async (e) => {
       let errorMsg = '登录失败，请稍后重试';
       try {
         const errorData = await response.json();
+        // 优先使用后端返回的message字段
         errorMsg = errorData.message || errorData.msg || `登录失败 (${response.status})`;
       } catch (e) {
-        if (response.status === 401) {
-          errorMsg = '验证码错误或已过期，请重新获取';
-        } else if (response.status === 403) {
-          errorMsg = '请求被拒绝，可能是CORS配置问题';
-        } else {
-          errorMsg = `登录失败 (状态码: ${response.status})`;
-        }
+        // 响应不是JSON，使用默认消息
+        errorMsg = `登录失败 (状态码: ${response.status})`;
       }
-      toast.error(errorMsg, '登录失败');
+      toast.error(errorMsg, '提示');
       console.error('登录API响应错误:', response.status, response.statusText);
       return;
     }
@@ -550,7 +531,7 @@ emailForm.addEventListener('submit', async (e) => {
       }, 1500);
     } else {
       // 登录失败，显示错误提示
-      toast.error(result.message, '登录失败');
+      toast.error(result.message, '提示');
       console.error('登录失败，错误码:', result.code, '错误信息:', result.message);
     }
     
@@ -566,7 +547,7 @@ emailForm.addEventListener('submit', async (e) => {
       }
     }
     
-    toast.error(errorMsg, '登录失败');
+    toast.error(errorMsg, '提示');
   }
 });
 

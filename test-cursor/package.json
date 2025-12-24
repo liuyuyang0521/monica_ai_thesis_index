@@ -1,0 +1,22 @@
+{
+  "name": "monica-ai-thesis-index",
+  "version": "2.0.0",
+  "description": "AI赋能科研任务中心 - 前端项目",
+  "main": "proxy-server.js",
+  "scripts": {
+    "start": "node proxy-server.js",
+    "dev": "node proxy-server.js",
+    "serve": "node proxy-server.js"
+  },
+  "keywords": [
+    "ai",
+    "thesis",
+    "frontend"
+  ],
+  "author": "AIWhim",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+

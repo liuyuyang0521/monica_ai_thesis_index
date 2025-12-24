@@ -80,30 +80,67 @@ class Toast {
   }
 
   // 成功提示
-  success(message, title = '成功') {
+  success(message, title = '成功', onConfirm = null, autoClose = 0) {
     this.show({
       title,
       message,
-      showCancel: false
+      showCancel: false,
+      onConfirm
     });
+    
+    if (autoClose > 0) {
+      setTimeout(() => {
+        this.hide();
+      }, autoClose);
+    }
   }
 
   // 错误提示
-  error(message, title = '错误') {
+  error(message, title = '错误', onConfirm = null, autoClose = 0) {
     this.show({
       title,
       message,
-      showCancel: false
+      showCancel: false,
+      onConfirm
     });
+    
+    if (autoClose > 0) {
+      setTimeout(() => {
+        this.hide();
+      }, autoClose);
+    }
   }
 
   // 警告提示
-  warning(message, title = '警告') {
+  warning(message, title = '警告', onConfirm = null, autoClose = 0) {
     this.show({
       title,
       message,
-      showCancel: false
+      showCancel: false,
+      onConfirm
     });
+    
+    if (autoClose > 0) {
+      setTimeout(() => {
+        this.hide();
+      }, autoClose);
+    }
+  }
+
+  // 信息提示
+  info(message, title = '提示', onConfirm = null, autoClose = 0) {
+    this.show({
+      title,
+      message,
+      showCancel: false,
+      onConfirm
+    });
+    
+    if (autoClose > 0) {
+      setTimeout(() => {
+        this.hide();
+      }, autoClose);
+    }
   }
 
   // 确认对话框
