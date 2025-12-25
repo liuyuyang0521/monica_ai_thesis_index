@@ -13,13 +13,16 @@ async function initPage() {
     return; // 不是需要登录的页面，直接返回
   }
   
-  // 检查登录状态
-  if (!isLoggedIn()) {
+  // 检查本地登录状态
+  const hasLocalSession = isLoggedIn();
+  
+  if (!hasLocalSession) {
+    // 本地没有登录信息，直接跳转登录页
     showLoginExpired();
     return;
   }
   
-  // 加载用户资料（包含用户信息和积分余额）
+  // 有本地登录信息，尝试加载用户资料（会自动验证服务端登录状态）
   await loadUserProfile();
 }
 
@@ -34,8 +37,22 @@ async function loadUserProfile() {
       // 获取用户资料失败
       console.error('获取用户资料失败:', result.message);
       
-      // 如果是未登录错误（10003），跳转到登录页
+      // 如果是未登录错误（10003），先尝试使用本地缓存，避免频繁跳转
       if (result.code === 10003) {
+        const localAccount = localStorage.getItem('account');
+        
+        // 如果有本地缓存，先使用本地信息，不立即跳转
+        // 只在用户尝试进行需要登录的操作时才提示登录过期
+        if (localAccount) {
+          console.warn('服务端登录状态已过期，但保留本地会话信息，允许用户继续浏览');
+          updateUserDisplay(localAccount);
+          updatePointsDisplay(0);
+          // 设置一个标记，表示登录可能已过期
+          sessionStorage.setItem('loginWarning', 'true');
+          return;
+        }
+        
+        // 没有本地缓存，才跳转到登录页
         showLoginExpired();
         return;
       }
@@ -48,6 +65,9 @@ async function loadUserProfile() {
       updatePointsDisplay(0);
       return;
     }
+    
+    // 成功获取用户资料，清除登录警告标记
+    sessionStorage.removeItem('loginWarning');
     
     // 成功获取用户资料
     const profileData = result.data;
@@ -81,9 +101,10 @@ async function loadUserProfile() {
   } catch (error) {
     console.error('加载用户资料错误:', error);
     
-    // 使用本地缓存
+    // 网络错误时，使用本地缓存，不跳转登录页
     const localAccount = localStorage.getItem('account');
     if (localAccount) {
+      console.warn('网络错误，使用本地缓存信息');
       updateUserDisplay(localAccount);
     }
     updatePointsDisplay(0);
@@ -234,8 +255,56 @@ async function refreshUserInfo() {
   await loadUserProfile();
 }
 
+/**
+ * 检查并确保用户已登录（用于执行需要登录的操作前）
+ * 如果登录已过期，提示用户重新登录
+ * @returns {Promise<boolean>} 返回是否已登录
+ */
+async function ensureLoggedIn() {
+  // 检查本地登录状态
+  if (!isLoggedIn()) {
+    showLoginExpired();
+    return false;
+  }
+  
+  // 如果有登录警告标记，说明之前检测到登录可能已过期
+  if (sessionStorage.getItem('loginWarning') === 'true') {
+    // 尝试重新获取用户信息，验证登录状态
+    const result = await getUserProfile();
+    
+    if (!result.success && result.code === 10003) {
+      // 确认登录已过期
+      showLoginExpired();
+      return false;
+    }
+    
+    // 登录仍然有效，清除警告标记
+    sessionStorage.removeItem('loginWarning');
+  }
+  
+  return true;
+}
+
 // 页面加载时自动初始化
 document.addEventListener('DOMContentLoaded', () => {
   initPage();
+});
+
+// 处理浏览器前进/后退缓存（BFCache）
+// 当用户使用后退按钮时，不重新检查登录状态，直接使用缓存的页面
+window.addEventListener('pageshow', (event) => {
+  // 如果页面是从缓存中恢复的（用户点击了后退/前进按钮）
+  if (event.persisted) {
+    console.log('页面从缓存恢复，跳过登录检查');
+    // 只刷新用户信息和积分显示，不重新检查登录状态
+    const account = localStorage.getItem('account');
+    if (account) {
+      updateUserDisplay(account);
+      // 异步刷新积分，但不做登录检查
+      loadUserProfile().catch(err => {
+        console.warn('刷新用户信息失败:', err);
+      });
+    }
+  }
 });
 

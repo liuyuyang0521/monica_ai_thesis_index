@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
    * 初始化任务列表
    */
   async function initTaskList() {
-    // 检查登录状态
-    if (!requireLogin()) {
+    // 检查并确保用户已登录（会验证服务端登录状态）
+    if (!await ensureLoggedIn()) {
       return;
     }
     

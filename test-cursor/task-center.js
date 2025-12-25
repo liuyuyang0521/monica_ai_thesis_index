@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
    * 处理订单提交
    */
   async function handleSubmit() {
-    // 检查登录状态
-    if (!requireLogin()) {
+    // 检查并确保用户已登录（会验证服务端登录状态）
+    if (!await ensureLoggedIn()) {
       return;
     }
     
